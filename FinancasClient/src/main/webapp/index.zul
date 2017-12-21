@@ -1,0 +1,49 @@
+<?page title="Auto Generated index.zul"?>
+<window title="Banco Zk! Versão 1.0" border="normal" id="exemplo"
+	apply="br.com.st.controler.Cindex">
+
+
+	<grid>
+		<columns>
+			<column label="Operações" width="100px" />
+			<column label="Agencia" width="100px" />
+			<column label="Conta" width="100px" />
+			<column label="Titular" width="150px" />
+			<column label="Saldo" width="100px" />
+			<column label="" />
+		</columns>
+		<rows>
+			<row>
+				<label value="Cadastro: " />
+				<textbox id="txtbxAgencia" width="90px" />
+				<textbox id="txtbxConta" width="90px" />
+				<textbox id="txtbxTitular" width="140px" />
+				<textbox id="txtbxSaldo" width="90px" />
+				<button label="Adicionar" id="btnCad" />
+
+			</row>
+
+		</rows>
+	</grid>
+
+	<!-- Lista Adicionar no index.zul -->
+	<listbox id="lstbxOperacoesRealizadas">
+		<listhead>
+			<listheader label="Agencia" width="90px" />
+			<listheader label="Conta" width="90px" />
+			<listheader label="Titular" width="150px" />
+			<listheader label="Saldo" width="90px" />
+		</listhead>
+		<template name="model">
+			<listitem>
+				<listcell label="${each.agencia}" />
+				<listcell label="${each.conta}" />
+				<listcell label="${each.titular}" />
+				<listcell label="${each.saldo}" />
+				<listcell label="${each.antes}" />
+			</listitem>
+		</template>
+	</listbox>
+	<label value="Vocês está usando: ${desktop.webApp.version}" />
+
+</window>
