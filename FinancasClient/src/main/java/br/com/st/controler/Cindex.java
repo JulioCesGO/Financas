@@ -27,72 +27,41 @@ public class Cindex extends SelectorComposer<Component> {
 	
 	private static String CONTARMISERVICE_URL = "rmi://localhost:1099/ContaRMIService";
 	private static String MOVIMENTACAO_RMI_SERVICE_URL = "rmi://localhost:1099/ContaRMIService";
+	
 	/**
 	 * Adicionar no controler o codigo abaixo
 	 */
 	private static final long serialVersionUID = 1L;
 
-	// Aqui ele ira vincular o botão com a textbox //
+	// Aqui ele ira vincular o bot�o com a textbox //
 	@Wire
-	private Textbox txtbxMaiuscula;
+	private Textbox txtbxAgencia;
+	@Wire
+	private Textbox txtbxConta;
+	@Wire
+	private Textbox txtbxTitular;
+	@Wire
+	private Textbox txtbxSaldo;
 
 	@Wire
 	private Listbox lstbxOperacoesRealizadas;
 
 	private ArrayList<LinkedHashMap<String, String>> listaOperacoes = new ArrayList<LinkedHashMap<String, String>>();
 
-	
-	
-	
 	// Metodo que ira ser acionado ao clicar no btnMaiuscula //
-	@Listen("onClick = #btnMaiuscula")
-	public void trocarPorMaiuscula() {
-		String antes = this.txtbxMaiuscula.getValue(); // Aqui ele pega o valor
-														// inserido
-		String depois = antes.toUpperCase(); // Aqui ele modifica o valor
-		this.txtbxMaiuscula.setValue(depois); // Aqui ele seta o valor
-												// modificado
+	@Listen("onClick = #btnCad")
+	public void addCadastro() {
+		String ag = this.txtbxAgencia.getValue();
+		String cc = this.txtbxConta.getValue();
+		String tt = this.txtbxTitular.getValue();
+		String sd = this.txtbxSaldo.getValue();
 
 		LinkedHashMap<String, String> hash = new LinkedHashMap<String, String>();
-		hash.put("operacoes", "Maiúscula");
-		hash.put("antes", antes); // Aqui ele mostra o valor anterior
-		hash.put("depois", depois); // O valor modificado
+		hash.put("agencia", ag);
+		hash.put("conta", cc); // Aqui ele mostra o valor anterior
+		hash.put("titular", tt);
+		hash.put("saldo", sd);
 		listaOperacoes.add(hash); // Adiciona a lista
-
-		
-		try {
-			ContaRMIService contaRMIService = (ContaRMIService) Naming.lookup(CONTARMISERVICE_URL);
-			List<Conta> contas = contaRMIService.getAllContas();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		this.lstbxOperacoesRealizadas.setModel(new ListModelArray<LinkedHashMap<String, String>>(this.listaOperacoes));
-	}
-
-	// Aqui ele ira vincular o botão com a textbox //
-	@Wire
-	private Textbox txtbxMinusculo;
-
-	@Listen("onClick = #btnMinusculo")
-	public void trocarPorMinuscula() {
-		String antes = this.txtbxMinusculo.getValue();
-		String depois = antes.toLowerCase();
-		this.txtbxMinusculo.setValue(depois);
-
-		LinkedHashMap<String, String> hash = new LinkedHashMap<String, String>();
-		hash.put("operacoes", "Minúscula");
-		hash.put("antes", antes);
-		hash.put("depois", depois);
-		listaOperacoes.add(hash);
 
 		this.lstbxOperacoesRealizadas.setModel(new ListModelArray<LinkedHashMap<String, String>>(this.listaOperacoes));
 	}
