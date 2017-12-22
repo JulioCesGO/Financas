@@ -4,6 +4,8 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -24,16 +26,33 @@ import br.com.diego.financas.rmi.ContaRMIService;
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public class Cindex extends SelectorComposer<Component> {
 
-	
-	private static String CONTARMISERVICE_URL = "rmi://localhost:1099/ContaRMIService";
-	private static String MOVIMENTACAO_RMI_SERVICE_URL = "rmi://localhost:1099/ContaRMIService";
-	
+	private static final ContaRMIService contaRMIService = carregaContaRMIService();
+
+	private static ContaRMIService carregaContaRMIService() {
+		System.out.println(">> Cliente iniciou");
+
+		ContaRMIService contaRMIService = null;
+		try {
+			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+			contaRMIService = (ContaRMIService) registry.lookup("ContaRMIService");
+			if(contaRMIService != null) {
+				System.out.println(">> lookup obteve com sucesso!");
+			} else {
+				System.out.println(">> lookup NÃƒO obteve nenhum objeto!");
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return contaRMIService;
+	}
+
 	/**
 	 * Adicionar no controler o codigo abaixo
 	 */
 	private static final long serialVersionUID = 1L;
 
-	// Aqui ele ira vincular o botão com a textbox //
+	// Aqui ele ira vincular o botï¿½o com a textbox //
 	@Wire
 	private Textbox txtbxAgencia;
 	@Wire
@@ -48,9 +67,9 @@ public class Cindex extends SelectorComposer<Component> {
 
 	private ArrayList<LinkedHashMap<String, String>> listaOperacoes = new ArrayList<LinkedHashMap<String, String>>();
 
-	// Metodo que ira ser acionado ao clicar no btnMaiuscula //
+	// Metodo que ira ser acionado ao clicar no btnCad //
 	@Listen("onClick = #btnCad")
-	public void addCadastro() {
+	public void addCadastro() throws RemoteException {
 		String ag = this.txtbxAgencia.getValue();
 		String cc = this.txtbxConta.getValue();
 		String tt = this.txtbxTitular.getValue();
@@ -62,6 +81,13 @@ public class Cindex extends SelectorComposer<Component> {
 		hash.put("titular", tt);
 		hash.put("saldo", sd);
 		listaOperacoes.add(hash); // Adiciona a lista
+
+		Conta conta = new Conta();
+		conta.setTitular(tt);
+		conta.setNumero("1234");
+		conta.setAgencia(ag);
+
+		contaRMIService.adicionarConta(conta);
 
 		this.lstbxOperacoesRealizadas.setModel(new ListModelArray<LinkedHashMap<String, String>>(this.listaOperacoes));
 	}

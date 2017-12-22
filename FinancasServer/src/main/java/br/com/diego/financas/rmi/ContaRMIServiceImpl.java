@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.diego.financas.modelo.Conta;
 import br.com.diego.financas.repository.ContaRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ContaRMIServiceImpl implements ContaRMIService {
 
 	@Autowired
