@@ -22,6 +22,7 @@ Framework front end
 mvn clean install 
 
 **executar o client:**
+
 mvn org.apache.tomcat.maven:tomcat7-maven-plugin:2.2:run -pl FinancasClient
 
 ** executar o server **
