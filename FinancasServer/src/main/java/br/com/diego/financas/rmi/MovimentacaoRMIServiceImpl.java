@@ -19,7 +19,7 @@ public class MovimentacaoRMIServiceImpl implements MovimentacaoRMIService {
 	}
 
 	@Override
-	public boolean adicionaMovimentoacao(Movimentacao movimentacao) {
+	public boolean adicionaMovimentacao(Movimentacao movimentacao) {
 		
 		return movimentacaoRepository.save(movimentacao) != null;
 	}

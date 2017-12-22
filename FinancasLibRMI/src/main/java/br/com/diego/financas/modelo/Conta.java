@@ -11,6 +11,9 @@ import javax.persistence.SequenceGenerator;
 @Entity
 @SequenceGenerator(name = "SEQ_CONTAS", sequenceName = "SEQ_CONTAS", initialValue = 1)
 public class Conta implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_CONTAS")
 	Integer id;

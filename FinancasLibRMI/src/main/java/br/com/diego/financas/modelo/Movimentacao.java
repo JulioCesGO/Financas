@@ -16,11 +16,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Cascade;
-
 @Entity
 @SequenceGenerator(name = "SEQ_MOV", sequenceName = "SEQ_MOV", initialValue = 1)
-public class Movimentacao implements Serializable{
+public class Movimentacao implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_MOV")
 	private Integer id;
@@ -31,7 +32,7 @@ public class Movimentacao implements Serializable{
 	private TipoTransacao tipo;
 
 	private String descricao;
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Conta conta;
 
 	public BigDecimal getValor() {

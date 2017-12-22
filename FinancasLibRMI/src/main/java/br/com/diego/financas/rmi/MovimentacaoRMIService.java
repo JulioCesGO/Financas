@@ -8,8 +8,7 @@ import br.com.diego.financas.modelo.Movimentacao;
 public interface MovimentacaoRMIService {
 
 	public List<Movimentacao> getMovimentacaoPorConta(Conta conta);
-	
-	public boolean adicionaMovimentoacao(Movimentacao movimentacao);
-	
-	
+
+	public boolean adicionaMovimentacao(Movimentacao movimentacao);
+
 }
