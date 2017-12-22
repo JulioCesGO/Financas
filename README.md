@@ -17,15 +17,16 @@ Contrato de Servicos do RMI
 Cliente RMI
 Framework front end
 
-**primeiro passo**
+**Primeiro Passo**
 
 mvn clean install 
 
-**executar o client:**
+**Executar o server **
+
+java -jar FinancasServer\target\server-0.0.1-SNAPSHOT.jar
+
+**Executar o client:**
 
 mvn org.apache.tomcat.maven:tomcat7-maven-plugin:2.2:run -pl FinancasClient
 
-** executar o server **
-
-java -jar /FinancasServer/target/server-0.0.1-SNAPSHOT.jar
 
