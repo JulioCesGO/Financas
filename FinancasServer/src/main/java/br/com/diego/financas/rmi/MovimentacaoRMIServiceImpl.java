@@ -18,10 +18,8 @@ public class MovimentacaoRMIServiceImpl implements MovimentacaoRMIService {
 		return movimentacaoRepository.findAllByContaId( conta.getId() );
 	}
 
-	
-
 	@Override
-	public boolean adicionaMovimentoacao(Movimentacao movimentacao) {
+	public boolean adicionaMovimentacao(Movimentacao movimentacao) {
 		return movimentacaoRepository.save(movimentacao) != null;
 	}
 
