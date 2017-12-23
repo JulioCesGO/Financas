@@ -16,8 +16,8 @@ public class Conta implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_CONTAS")
-	Integer id;
-	String titular, numero, banco, agencia;
+	private Integer id;
+	private String titular, numero, banco, agencia;
 
 	public Integer getId() {
 		return id;
