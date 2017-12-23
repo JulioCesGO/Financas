@@ -1,19 +1,21 @@
 package br.com.st.controler;
 
+import java.math.BigDecimal;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.Date;
 import java.util.List;
 
+import br.com.diego.financas.modelo.Movimentacao;
+import br.com.diego.financas.modelo.TipoTransacao;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.ListModelArray;
-import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Textbox;
+import org.zkoss.zul.*;
 
 import br.com.diego.financas.modelo.Conta;
 import br.com.diego.financas.rmi.ContaRMIService;
@@ -56,16 +58,73 @@ public class Cindex extends SelectorComposer<Component> {
 	private Textbox txtbxConta;
 	@Wire
 	private Textbox txtbxTitular;
+	@Wire
+	private Intbox txtbxMovIdConta;
+	@Wire
+	private Doublebox doublebxMovValor;
+	@Wire
+	private Textbox txtbxMovTipo;
 
 	@Wire
 	private Listbox lstbxContasCadastradas;
 
+	@Wire
+	private Listbox lstbxMovimentacoes;
+
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
+		atualizaDadosDaTela();
+	}
 
-		List<Conta> todasContas = contaRMIService.getAllContas();
-		this.lstbxContasCadastradas.setModel(new ListModelArray<Conta>(todasContas));
+	@Listen("onClick = #btnListMov")
+	public void listarMovimentacoes() throws RemoteException {
+		atualizaDadosDaTela();
+	}
+
+	@Listen("onClick = #btnCadMovRemocao")
+	public void cadastrarMovimentacaoRemocao() throws RemoteException {
+		Integer idConta = this.txtbxMovIdConta.getValue();
+		Double valorMovimentacao = this.doublebxMovValor.getValue();
+
+		if (idConta == 0 || valorMovimentacao == 0) {
+			return;
+		}
+
+		Conta conta = contaRMIService.getContaById(idConta);
+
+		Movimentacao mov = new Movimentacao();
+		mov.setValor(BigDecimal.valueOf(valorMovimentacao));
+		mov.setDataMovimentacao(new Date());
+		mov.setTipo(TipoTransacao.SAIDA);
+
+		contaRMIService.adicionarMovimentacao(conta, mov);
+
+		atualizaDadosDaTela();
+	}
+
+	@Listen("onClick = #btnCadMovAdicao")
+	public void cadastrarMovimentacaoAdicao() throws RemoteException {
+		System.out.println('0');
+		Integer idConta = this.txtbxMovIdConta.getValue();
+		Double valorMovimentacao = this.doublebxMovValor.getValue();
+
+		if (idConta == 0 || idConta == null || valorMovimentacao == 0 || valorMovimentacao == null) {
+			return;
+		}
+
+		System.out.println('1');
+		Conta conta = contaRMIService.getContaById(idConta);
+		System.out.println('2');
+		Movimentacao mov = new Movimentacao();
+		mov.setValor(BigDecimal.valueOf(valorMovimentacao));
+		mov.setDataMovimentacao(new Date());
+		mov.setTipo(TipoTransacao.ENTRADA);
+		System.out.println('3');
+		contaRMIService.adicionarMovimentacao(conta, mov);
+		System.out.println('4');
+		atualizaDadosDaTela();
+		System.out.println('5');
 	}
 
 	@Listen("onClick = #btnCad")
@@ -87,17 +146,11 @@ public class Cindex extends SelectorComposer<Component> {
 
 		contaRMIService.adicionarConta(conta);
 
-		List<Conta> todasContas = contaRMIService.getAllContas();
-		this.lstbxContasCadastradas.setModel(new ListModelArray<Conta>(todasContas));
+		atualizaDadosDaTela();
 	}
 
 	private boolean isNullOuBranco(String valor) {
 		return valor == null || valor.trim() == "";
-	}
-
-	@Command
-	public void listarMovimentacoes() {
-		System.out.println("<<<<<<<<<<<<<<<<< Recebeu?");
 	}
 
 	@Listen("onClick = #btnDel")
@@ -115,8 +168,18 @@ public class Cindex extends SelectorComposer<Component> {
 
 		contaRMIService.adicionarConta(conta);
 
+		atualizaDadosDaTela();
+	}
+
+	private void atualizaDadosDaTela() throws RemoteException {
 		List<Conta> todasContas = contaRMIService.getAllContas();
 		this.lstbxContasCadastradas.setModel(new ListModelArray<Conta>(todasContas));
+
+		Integer idConta = this.txtbxMovIdConta.getValue();
+		if (idConta != null && idConta != 0) {
+			List<Movimentacao> todasMovimentacoes = contaRMIService.getAllMovimentacoesDaContaId(idConta);
+			this.lstbxMovimentacoes.setModel(new ListModelArray<Movimentacao>(todasMovimentacoes));
+		}
 	}
 
 }

@@ -4,7 +4,7 @@
 
 	<grid vflex="1">
 		<columns>
-			<column label="Dados" width="150px"/>
+			<column label="Nova Conta" width="150px"/>
 			<column label=""/>
 		</columns>
 		<rows>
@@ -57,5 +57,47 @@
 			</listitem>
 		</template>
 	</listbox>
+
+	<grid vflex="1">
+		<columns>
+			<column label="Nova Movimentação" width="220px"/>
+			<column label="" width="220px"/>
+			<column label="" width="220px"/>
+			<column label="" width="220px"/>
+			<column label="" width="220px"/>
+		</columns>
+		<rows>
+			<row>
+				<label value="Id Conta" width="150px"/>
+				<intbox id="txtbxMovIdConta" width="150px"/>
+				<button label="Listar Movimentações" id="btnListMov" width="200px"/>
+			</row>
+			<row>
+				<label value="Valor" width="150px"/>
+				<doublebox id="doublebxMovValor" width="150px"/>
+				<button label="+" id="btnCadMovAdicao" width="200px"/>
+				<button label="-" id="btnCadMovRemocao" width="200px"/>
+			</row>
+			<row>
+
+			</row>
+		</rows>
+	</grid>
+
+	<listbox id="lstbxMovimentacoes">
+		<listhead>
+			<listheader label="Valor" width="90px"/>
+			<listheader label="Data" width="90px"/>
+			<listheader label="Tipo" width="90px"/>
+		</listhead>
+		<template name="model">
+			<listitem>
+				<listcell label="${each.valor}"/>
+				<listcell label="${each.dataMovimentacao}"/>
+				<listcell label="x"/>
+			</listitem>
+		</template>
+	</listbox>
+
 
 </window>

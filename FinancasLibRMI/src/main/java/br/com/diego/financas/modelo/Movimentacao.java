@@ -25,13 +25,15 @@ public class Movimentacao implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_MOV")
 	private Integer id;
+
 	private BigDecimal valor;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataMovimentacao;
+
 	@Enumerated(EnumType.STRING)
 	private TipoTransacao tipo;
 
-	private String descricao;
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Conta conta;
 
@@ -57,14 +59,6 @@ public class Movimentacao implements Serializable {
 
 	public void setTipo(TipoTransacao tipo) {
 		this.tipo = tipo;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
 	}
 
 	public Conta getConta() {
