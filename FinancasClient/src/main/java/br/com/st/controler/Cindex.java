@@ -9,6 +9,7 @@ import java.util.List;
 
 import br.com.diego.financas.modelo.Movimentacao;
 import br.com.diego.financas.modelo.TipoTransacao;
+import br.com.diego.financas.rmi.MovimentacaoRMIService;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
@@ -24,6 +25,7 @@ import br.com.diego.financas.rmi.ContaRMIService;
 public class Cindex extends SelectorComposer<Component> {
 
 	private static final ContaRMIService contaRMIService = carregaContaRMIService();
+	private static final MovimentacaoRMIService movimentacaoRMIService = carregaMovimentacaoRMIService();
 
 	private static ContaRMIService carregaContaRMIService() {
 		System.out.println(">> Cliente iniciou");
@@ -33,15 +35,32 @@ public class Cindex extends SelectorComposer<Component> {
 			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
 			contaRMIService = (ContaRMIService) registry.lookup("ContaRMIService");
 			if (contaRMIService != null) {
-				System.out.println(">> lookup obteve com sucesso!");
+				System.out.println(">> lookup obteve com sucesso ContaRMIService!");
 			} else {
-				System.out.println(">> lookup NÃO obteve nenhum objeto!");
+				System.out.println(">> lookup NÃO obteve nenhum objeto ContaRMIService!");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 
 		return contaRMIService;
+	}
+
+	private static MovimentacaoRMIService carregaMovimentacaoRMIService() {
+		MovimentacaoRMIService movimentacaoRMIService = null;
+		try {
+			Registry registry = LocateRegistry.getRegistry("localhost", 1100);
+			movimentacaoRMIService = (MovimentacaoRMIService) registry.lookup("MovimentacaoRMIService");
+			if (movimentacaoRMIService != null) {
+				System.out.println(">> lookup obteve com sucesso MovimentacaoRMIService!");
+			} else {
+				System.out.println(">> lookup NÃO obteve nenhum objeto MovimentacaoRMIService!");
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return movimentacaoRMIService;
 	}
 
 	/**
@@ -87,7 +106,7 @@ public class Cindex extends SelectorComposer<Component> {
 		Integer idConta = this.txtbxMovIdConta.getValue();
 		Double valorMovimentacao = this.doublebxMovValor.getValue();
 
-		if (idConta == 0 || valorMovimentacao == 0) {
+		if (idConta == 0 || idConta == null || valorMovimentacao == 0 || valorMovimentacao == null) {
 			return;
 		}
 
@@ -95,10 +114,11 @@ public class Cindex extends SelectorComposer<Component> {
 
 		Movimentacao mov = new Movimentacao();
 		mov.setValor(BigDecimal.valueOf(valorMovimentacao));
+		mov.setConta(conta);
 		mov.setDataMovimentacao(new Date());
 		mov.setTipo(TipoTransacao.SAIDA);
 
-		contaRMIService.adicionarMovimentacao(conta, mov);
+		movimentacaoRMIService.adicionaMovimentacao(mov);
 
 		atualizaDadosDaTela();
 	}
@@ -116,10 +136,11 @@ public class Cindex extends SelectorComposer<Component> {
 
 		Movimentacao mov = new Movimentacao();
 		mov.setValor(BigDecimal.valueOf(valorMovimentacao));
+		mov.setConta(conta);
 		mov.setDataMovimentacao(new Date());
 		mov.setTipo(TipoTransacao.ENTRADA);
 
-		contaRMIService.adicionarMovimentacao(conta, mov);
+		movimentacaoRMIService.adicionaMovimentacao(mov);
 
 		atualizaDadosDaTela();
 	}
@@ -174,7 +195,8 @@ public class Cindex extends SelectorComposer<Component> {
 
 		Integer idConta = this.txtbxMovIdConta.getValue();
 		if (idConta != null && idConta != 0) {
-			List<Movimentacao> todasMovimentacoes = contaRMIService.getAllMovimentacoesDaContaId(idConta);
+			Conta conta = contaRMIService.getContaById(idConta);
+			List<Movimentacao> todasMovimentacoes = movimentacaoRMIService.getMovimentacaoPorConta(conta);
 			this.lstbxMovimentacoes.setModel(new ListModelArray<Movimentacao>(todasMovimentacoes));
 		}
 	}

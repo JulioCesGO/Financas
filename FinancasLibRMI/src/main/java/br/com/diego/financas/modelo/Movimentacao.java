@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 @SequenceGenerator(name = "SEQ_MOV", sequenceName = "SEQ_MOV", initialValue = 1)
 public class Movimentacao implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_MOV")
@@ -34,7 +34,7 @@ public class Movimentacao implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private TipoTransacao tipo;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	private Conta conta;
 
 	public BigDecimal getValor() {

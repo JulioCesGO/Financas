@@ -35,13 +35,6 @@ public class ContaRMIServiceImpl implements ContaRMIService {
 	}
 
 	@Override
-	public void adicionarMovimentacao(Conta conta, Movimentacao movimentacao) throws RemoteException {
-		movimentacao.setConta(conta);
-		movimentacaoRepository.save(movimentacao);
-		contaRepository.save(conta);
-	}
-
-	@Override
 	public void removeConta(Conta conta) throws RemoteException {
 		contaRepository.delete(conta);
 	}

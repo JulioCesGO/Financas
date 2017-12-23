@@ -1,5 +1,6 @@
 package br.com.diego.financas;
 
+import br.com.diego.financas.rmi.MovimentacaoRMIService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,17 @@ public class FinancasApplication {
 		exporter.setService(implementation);
 		exporter.setServiceName(serviceInterface.getSimpleName());
 		exporter.setRegistryPort(1099);
+		return exporter;
+	}
+
+	@Bean
+	RmiServiceExporter exporter2(MovimentacaoRMIService implementation) {
+		Class<MovimentacaoRMIService> serviceInterface = MovimentacaoRMIService.class;
+		RmiServiceExporter exporter = new RmiServiceExporter();
+		exporter.setServiceInterface(serviceInterface);
+		exporter.setService(implementation);
+		exporter.setServiceName(serviceInterface.getSimpleName());
+		exporter.setRegistryPort(1100);
 		return exporter;
 	}
 

@@ -14,15 +14,15 @@ public class MovimentacaoRMIServiceImpl implements MovimentacaoRMIService {
 
 	@Autowired
 	private MovimentacaoRepository movimentacaoRepository;
-	
+
 	@Override
 	public List<Movimentacao> getMovimentacaoPorConta(Conta conta) {
-		return movimentacaoRepository.findAllByContaId( conta.getId() );
+		return movimentacaoRepository.findAllByContaId(conta.getId());
 	}
 
 	@Override
-	public boolean adicionaMovimentacao(Movimentacao movimentacao) {
-		return movimentacaoRepository.save(movimentacao) != null;
+	public void adicionaMovimentacao(Movimentacao movimentacao) {
+		movimentacaoRepository.save(movimentacao);
 	}
 
 }
