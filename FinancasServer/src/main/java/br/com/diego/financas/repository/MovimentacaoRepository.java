@@ -12,6 +12,6 @@ import br.com.diego.financas.modelo.Movimentacao;
 @Repository
 public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Integer> {
 
-	@Query("select m from Movimentacao m where m.conta.id = :id order by m.dataMovimentacao desc")
+	@Query("select m from Movimentacao m where m.conta.id = :id")
 	public List<Movimentacao> findAllByContaId(@Param("id") Integer id);
 }
