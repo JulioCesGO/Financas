@@ -105,7 +105,6 @@ public class Cindex extends SelectorComposer<Component> {
 
 	@Listen("onClick = #btnCadMovAdicao")
 	public void cadastrarMovimentacaoAdicao() throws RemoteException {
-		System.out.println('0');
 		Integer idConta = this.txtbxMovIdConta.getValue();
 		Double valorMovimentacao = this.doublebxMovValor.getValue();
 
@@ -113,18 +112,16 @@ public class Cindex extends SelectorComposer<Component> {
 			return;
 		}
 
-		System.out.println('1');
 		Conta conta = contaRMIService.getContaById(idConta);
-		System.out.println('2');
+
 		Movimentacao mov = new Movimentacao();
 		mov.setValor(BigDecimal.valueOf(valorMovimentacao));
 		mov.setDataMovimentacao(new Date());
 		mov.setTipo(TipoTransacao.ENTRADA);
-		System.out.println('3');
+
 		contaRMIService.adicionarMovimentacao(conta, mov);
-		System.out.println('4');
+
 		atualizaDadosDaTela();
-		System.out.println('5');
 	}
 
 	@Listen("onClick = #btnCad")
