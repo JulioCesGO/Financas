@@ -35,7 +35,7 @@ public class Cindex extends SelectorComposer<Component> {
 		try {
 			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
 			contaRMIService = (ContaRMIService) registry.lookup("ContaRMIService");
-			if(contaRMIService != null) {
+			if (contaRMIService != null) {
 				System.out.println(">> lookup obteve com sucesso!");
 			} else {
 				System.out.println(">> lookup NÃO obteve nenhum objeto!");
@@ -52,44 +52,43 @@ public class Cindex extends SelectorComposer<Component> {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	// Aqui ele ira vincular o bot�o com a textbox //
+	// Aqui ele ira vincular o botão com a textbox //
+	@Wire
+	private Textbox txtbxBanco;
 	@Wire
 	private Textbox txtbxAgencia;
 	@Wire
 	private Textbox txtbxConta;
 	@Wire
 	private Textbox txtbxTitular;
-	@Wire
-	private Textbox txtbxSaldo;
+//	@Wire
+//	private Textbox txtbxSaldo;
 
 	@Wire
-	private Listbox lstbxOperacoesRealizadas;
+	private Listbox lstbxContasCadastradas;
 
-	private ArrayList<LinkedHashMap<String, String>> listaOperacoes = new ArrayList<LinkedHashMap<String, String>>();
+	private ArrayList<Conta> listaContasCadastradas = new ArrayList<Conta>();
 
 	// Metodo que ira ser acionado ao clicar no btnCad //
 	@Listen("onClick = #btnCad")
 	public void addCadastro() throws RemoteException {
-		String ag = this.txtbxAgencia.getValue();
-		String cc = this.txtbxConta.getValue();
-		String tt = this.txtbxTitular.getValue();
-		String sd = this.txtbxSaldo.getValue();
+		String valorBanco = this.txtbxBanco.getValue();
+		String valorAgencia = this.txtbxAgencia.getValue();
+		String valorNumeroConta = this.txtbxConta.getValue();
+		String valorTitular = this.txtbxTitular.getValue();
 
-		LinkedHashMap<String, String> hash = new LinkedHashMap<String, String>();
-		hash.put("agencia", ag);
-		hash.put("conta", cc); // Aqui ele mostra o valor anterior
-		hash.put("titular", tt);
-		hash.put("saldo", sd);
-		listaOperacoes.add(hash); // Adiciona a lista
+//		listaOperacoes.add(hash); // Adiciona a lista
 
 		Conta conta = new Conta();
-		conta.setTitular(tt);
-		conta.setNumero("1234");
-		conta.setAgencia(ag);
+		conta.setBanco(valorBanco);
+		conta.setAgencia(valorAgencia);
+		conta.setNumero(valorNumeroConta);
+		conta.setTitular(valorTitular);
 
 		contaRMIService.adicionarConta(conta);
+		listaContasCadastradas.add(conta);
 
-		this.lstbxOperacoesRealizadas.setModel(new ListModelArray<LinkedHashMap<String, String>>(this.listaOperacoes));
+		this.lstbxContasCadastradas.setModel(new ListModelArray<Conta>(this.listaContasCadastradas));
 	}
 
 }
