@@ -11,7 +11,7 @@
 	</timer>
 	<separator bar="true" />
 <!-- 	Adicinado a data fim -->
-	<grid vflex="1" xmlns:w="client">
+	<grid vflex="0" xmlns:w="client">
 		<columns>
 			<column label="Nova Conta" width="150px"/>
 			<column label=""/>
@@ -99,7 +99,7 @@
 		</template>
 	</listbox>
 
-	<grid vflex="1">
+	<grid vflex="0">
 		<columns>
 			<column label="Nova Movimentação" width="220px"/>
 			<column label="" width="220px"/>
