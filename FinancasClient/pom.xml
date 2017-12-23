@@ -77,11 +77,11 @@
     </dependency>
  
     <dependency>
-			<groupId>br.com.bruno-starlley-julio.financeiro</groupId>
-			<artifactId>rmi</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
-			<scope>compile</scope>
-		</dependency>
+		<groupId>br.com.bruno-starlley-julio.financeiro</groupId>
+		<artifactId>rmi</artifactId>
+		<version>0.0.2-SNAPSHOT</version>
+		<scope>compile</scope>
+	</dependency>
   </dependencies>
   
 </project>
