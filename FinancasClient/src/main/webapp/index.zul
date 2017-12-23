@@ -1,16 +1,9 @@
-<<<<<<< HEAD
 <?page title="Aplicação Finanças"?>
 <window title="By Bruno e Starlley e Julio" border="normal" id="exemplo"
 	apply="br.com.st.controler.Cindex">
-=======
-<?page title="Aplicação Finanças - By Bruno e Starlley e Julio"?>
-<window title="Aplicação Finanças - By Bruno e Starlley e Julio" border="normal" id="exemplo"
-        apply="br.com.st.controler.Cindex">
->>>>>>> fe9834df38c52902c7d7fe4f9cac54d14567d384
 
 	<grid vflex="1">
 		<columns>
-<<<<<<< HEAD
 			<column label="Dados" width="150px" />
 			<column label="" />
 		</columns>
@@ -33,23 +26,6 @@
 			</row>
 			<row>
 				<button label="Salvar" id="btnCad" />
-=======
-			<column label="Operação" width="16%"/>
-			<column label="Banco" width="16%"/>
-			<column label="Agência" width="16%"/>
-			<column label="Conta" width="16%"/>
-			<column label="Titular" width="16%"/>
-			<column label="" width="16%"/>
-		</columns>
-		<rows>
-			<row>
-				<label value="Cadastro:" width="100%"/>
-				<textbox id="txtbxBanco" width="100%"/>
-				<textbox id="txtbxAgencia" width="100%"/>
-				<textbox id="txtbxConta" width="100%"/>
-				<textbox id="txtbxTitular" width="100%"/>
-				<button label="Adicionar" id="btnCad" width="100%"/>
->>>>>>> fe9834df38c52902c7d7fe4f9cac54d14567d384
 			</row>
 
 		</rows>
@@ -59,7 +35,6 @@
 	<listbox id="lstbxContasCadastradas">
 
 		<listhead>
-<<<<<<< HEAD
 			<listheader label="Banco" width="90px" />
 			<listheader label="Agência" width="90px" />
 			<listheader label="Conta" width="90px" />
@@ -71,25 +46,6 @@
 				<listcell label="${each.agencia}" />
 				<listcell label="${each.numero}" />
 				<listcell label="${each.titular}" />
-=======
-			<listheader label="Id" width="20%"/>
-			<listheader label="Banco" width="20%"/>
-			<listheader label="Agência" width="20%"/>
-			<listheader label="Conta" width="20%"/>
-			<listheader label="Titular" width="20%"/>
-			<listheader label="Ver Movimentações" width="20%"/>
-		</listhead>
-		<template name="model">
-			<listitem>
-				<listcell label="${each.id}"/>
-				<listcell label="${each.banco}"/>
-				<listcell label="${each.agencia}"/>
-				<listcell label="${each.numero}"/>
-				<listcell label="${each.titular}"/>
-				<listcell>
-					<button id="btnListMov${each.id}" label="Mov3." onClick="@command('listarMovimentacoes')"/>
-				</listcell>
->>>>>>> fe9834df38c52902c7d7fe4f9cac54d14567d384
 			</listitem>
 		</template>
 	</listbox>
