@@ -42,7 +42,6 @@
 			<listheader label="Agência" width="20%"/>
 			<listheader label="Conta" width="20%"/>
 			<listheader label="Titular" width="20%"/>
-			<listheader label="Ver Movimentações" width="20%"/>
 		</listhead>
 		<template name="model">
 			<listitem>
@@ -51,9 +50,6 @@
 				<listcell label="${each.agencia}"/>
 				<listcell label="${each.numero}"/>
 				<listcell label="${each.titular}"/>
-				<listcell>
-					<button id="btnListMov${each.id}" label="Mov3." onClick="@command('listarMovimentacoes')"/>
-				</listcell>
 			</listitem>
 		</template>
 	</listbox>
