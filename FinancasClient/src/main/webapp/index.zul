@@ -90,7 +90,7 @@
 			<listitem>
 				<listcell label="${each.valor}"/>
 				<listcell label="${each.dataMovimentacao}"/>
-				<listcell label="x"/>
+				<listcell label="${each.tipo.name()}"/>
 			</listitem>
 		</template>
 	</listbox>
