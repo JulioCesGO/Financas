@@ -25,7 +25,11 @@
 				<textbox id="txtbxTitular" width="150px"/>
 			</row>
 			<row>
-				<button label="Salvar" id="btnCad"/>
+				<button label="Salvar"  id="btnCad" width="100px">
+	<attribute name="onClick">{
+			Messagebox.show("Conta Cadastrada", "Notificação", Messagebox.OK, Messagebox.EXCLAMATION);
+	}</attribute>
+</button>
 			</row>
 		</rows>
 	</grid>
