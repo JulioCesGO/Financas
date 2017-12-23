@@ -51,7 +51,8 @@
 				<listcell label="${each.agencia}" />
 				<listcell label="${each.numero}" />
 				<listcell label="${each.titular}" />
-
+				</listitem>
+<listhead>
 			<listheader label="Id" width="20%"/>
 			<listheader label="Banco" width="20%"/>
 			<listheader label="Agência" width="20%"/>
@@ -59,6 +60,7 @@
 			<listheader label="Titular" width="20%"/>
 			<listheader label="Ver Movimentações" width="20%"/>
 		</listhead>
+		</template>
 		<template name="model">
 			<listitem>
 				<listcell label="${each.id}"/>
