@@ -82,9 +82,9 @@
 
 	<listbox id="lstbxMovimentacoes">
 		<listhead>
-			<listheader label="Valor" width="90px"/>
-			<listheader label="Data" width="90px"/>
-			<listheader label="Tipo" width="90px"/>
+			<listheader label="Valor" width="220px"/>
+			<listheader label="Data" width="220px"/>
+			<listheader label="Tipo" width="220px"/>
 		</listhead>
 		<template name="model">
 			<listitem>

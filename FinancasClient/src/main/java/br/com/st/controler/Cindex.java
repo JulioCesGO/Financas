@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,8 +29,6 @@ public class Cindex extends SelectorComposer<Component> {
 	private static final MovimentacaoRMIService movimentacaoRMIService = carregaMovimentacaoRMIService();
 
 	private static ContaRMIService carregaContaRMIService() {
-		System.out.println(">> Cliente iniciou");
-
 		ContaRMIService contaRMIService = null;
 		try {
 			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
@@ -93,12 +92,12 @@ public class Cindex extends SelectorComposer<Component> {
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		atualizaDadosDaTela();
+		atualizaDadosDaTela(false);
 	}
 
 	@Listen("onClick = #btnListMov")
 	public void listarMovimentacoes() throws RemoteException {
-		atualizaDadosDaTela();
+		atualizaDadosDaTela(true);
 	}
 
 	@Listen("onClick = #btnCadMovRemocao")
@@ -120,7 +119,7 @@ public class Cindex extends SelectorComposer<Component> {
 
 		movimentacaoRMIService.adicionaMovimentacao(mov);
 
-		atualizaDadosDaTela();
+		atualizaDadosDaTela(false);
 	}
 
 	@Listen("onClick = #btnCadMovAdicao")
@@ -142,7 +141,7 @@ public class Cindex extends SelectorComposer<Component> {
 
 		movimentacaoRMIService.adicionaMovimentacao(mov);
 
-		atualizaDadosDaTela();
+		atualizaDadosDaTela(false);
 	}
 
 	@Listen("onClick = #btnCad")
@@ -164,7 +163,7 @@ public class Cindex extends SelectorComposer<Component> {
 
 		contaRMIService.adicionarConta(conta);
 
-		atualizaDadosDaTela();
+		atualizaDadosDaTela(false);
 	}
 
 	private boolean isNullOuBranco(String valor) {
@@ -186,18 +185,24 @@ public class Cindex extends SelectorComposer<Component> {
 
 		contaRMIService.adicionarConta(conta);
 
-		atualizaDadosDaTela();
+		atualizaDadosDaTela(false);
 	}
 
-	private void atualizaDadosDaTela() throws RemoteException {
+	private void atualizaDadosDaTela(boolean acaoDoBotaoDeListagem) throws RemoteException {
 		List<Conta> todasContas = contaRMIService.getAllContas();
 		this.lstbxContasCadastradas.setModel(new ListModelArray<Conta>(todasContas));
 
 		Integer idConta = this.txtbxMovIdConta.getValue();
 		if (idConta != null && idConta != 0) {
 			Conta conta = contaRMIService.getContaById(idConta);
-			List<Movimentacao> todasMovimentacoes = movimentacaoRMIService.getMovimentacaoPorConta(conta);
-			this.lstbxMovimentacoes.setModel(new ListModelArray<Movimentacao>(todasMovimentacoes));
+			if (conta != null) {
+				List<Movimentacao> movimentacoesDaConta = movimentacaoRMIService.getMovimentacaoPorConta(conta);
+				this.lstbxMovimentacoes.setModel(new ListModelArray<Movimentacao>(movimentacoesDaConta));
+			} else if (acaoDoBotaoDeListagem) {
+				Messagebox.show("Nao foi encontrada Conta com o id informado!", "Listar Movimentacoes", Messagebox.OK, Messagebox.EXCLAMATION);
+				List<Movimentacao> listaDeMovimentacoesVazia = new ArrayList<Movimentacao>();
+				this.lstbxMovimentacoes.setModel(new ListModelArray<Movimentacao>(listaDeMovimentacoesVazia));
+			}
 		}
 	}
 
