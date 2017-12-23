@@ -1,7 +1,5 @@
-<?page title="Auto Generated index.zul"?>
-<window title="Banco Zk! Versão 1.0" border="normal" id="exemplo"
-        apply="br.com.st.controler.Cindex">
-
+<?page title="Aplicação Finanças"?>
+<window title="By Bruno e Starlley e Julio" border="normal" id="exemplo" apply="br.com.st.controler.Cindex">
 
 	<grid>
 		<columns>

@@ -67,7 +67,13 @@ public class Cindex extends SelectorComposer<Component> {
 	@Wire
 	private Listbox lstbxContasCadastradas;
 
-	private ArrayList<Conta> listaContasCadastradas = new ArrayList<Conta>();
+	@Override
+	public void doAfterCompose(Component comp) throws Exception {
+		super.doAfterCompose(comp);
+
+		List<Conta> todasContas = contaRMIService.getAllContas();
+		this.lstbxContasCadastradas.setModel(new ListModelArray<Conta>(todasContas));
+	}
 
 	// Metodo que ira ser acionado ao clicar no btnCad //
 	@Listen("onClick = #btnCad")
@@ -77,8 +83,6 @@ public class Cindex extends SelectorComposer<Component> {
 		String valorNumeroConta = this.txtbxConta.getValue();
 		String valorTitular = this.txtbxTitular.getValue();
 
-//		listaOperacoes.add(hash); // Adiciona a lista
-
 		Conta conta = new Conta();
 		conta.setBanco(valorBanco);
 		conta.setAgencia(valorAgencia);
@@ -86,9 +90,9 @@ public class Cindex extends SelectorComposer<Component> {
 		conta.setTitular(valorTitular);
 
 		contaRMIService.adicionarConta(conta);
-		listaContasCadastradas.add(conta);
 
-		this.lstbxContasCadastradas.setModel(new ListModelArray<Conta>(this.listaContasCadastradas));
+		List<Conta> todasContas = contaRMIService.getAllContas();
+		this.lstbxContasCadastradas.setModel(new ListModelArray<Conta>(todasContas));
 	}
 
 }
