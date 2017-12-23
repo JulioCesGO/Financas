@@ -33,6 +33,12 @@ Construa o projeto com maven:
 
 mvn clean install
 
+### Pre-condição de execução
+
+Nossa aplicação Server utiliza uma conexão com MySQL para criar automaticamente um novo banco de nome "financas_bjs" e
+    então utilizá-lo. Portanto garanta primeiro que você tem o MySQL instalado e ele já está rodando antes de rodar o
+    comando do passo seguinte.
+
 ### Executar o server 
 
 A partir da pasta raiz do repositório git, onde temos acesso a todos submodulos, execute o servidor:
