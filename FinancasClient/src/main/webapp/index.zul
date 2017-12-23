@@ -4,30 +4,34 @@
 
 	<grid vflex="1">
 		<columns>
-			<column label="Dados" width="150px"/>
-			<column label=""/>
+			<column label="Dados" width="150px" />
+			<column label="" />
 
 		</columns>
 		<rows>
 			<row>
-				<label value="Banco" width="150px"/>
-				<textbox id="txtbxBanco" width="150px"/>
+				<label value="Banco" width="150px" />
+				<textbox id="txtbxBanco" width="150px" />
 			</row>
 			<row>
-				<label value="Agencia" width="150px"/>
-				<textbox id="txtbxAgencia" width="150px"/>
+				<label value="Agencia" width="150px" />
+				<textbox id="txtbxAgencia" width="150px" />
 			</row>
 			<row>
 				Conta
-				<textbox id="txtbxConta" width="150px"/>
+				<textbox id="txtbxConta" width="150px" />
 			</row>
 			<row>
 				Titular
-				<textbox id="txtbxTitular" width="150px"/>
+				<textbox id="txtbxTitular" width="150px" />
 			</row>
 			<row>
-				<button label="Salvar" id="btnCad" />
 
+				<button label="Salvar" id="btnCad" width="100px">
+					<attribute name="onClick">{
+			Messagebox.show("Conta Cadastrada com sucesso!", "Notificação", Messagebox.OK, Messagebox.EXCLAMATION);
+	}</attribute>
+</button>
 			</row>
 		</rows>
 	</grid>
