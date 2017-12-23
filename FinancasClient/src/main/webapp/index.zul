@@ -26,7 +26,6 @@
 				<textbox id="txtbxTitular" width="150px" />
 			</row>
 			<row>
-
 				<button label="Salvar" id="btnCad" width="100px">
 					<attribute name="onClick">{
 			Messagebox.show("Conta Cadastrada com sucesso!", "Notificação", Messagebox.OK, Messagebox.EXCLAMATION);
