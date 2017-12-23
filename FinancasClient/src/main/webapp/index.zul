@@ -1,42 +1,51 @@
 <?page title="Aplicação Finanças"?>
-<window title="By Bruno e Starlley e Julio" border="normal" id="exemplo" apply="br.com.st.controler.Cindex">
+<window title="By Bruno e Starlley e Julio" border="normal" id="exemplo"
+	apply="br.com.st.controler.Cindex">
 
-	<grid>
+	<grid vflex="1">
 		<columns>
-			<column label="Operação" width="100px"/>
-			<column label="Banco" width="100px"/>
-			<column label="Agência" width="100px"/>
-			<column label="Conta" width="100px"/>
-			<column label="Titular" width="150px"/>
+			<column label="Dados" width="150px" />
 			<column label="" />
 		</columns>
 		<rows>
 			<row>
-				<label value="Cadastro:"/>
-				<textbox id="txtbxBanco" width="90px"/>
-				<textbox id="txtbxAgencia" width="90px"/>
-				<textbox id="txtbxConta" width="90px"/>
-				<textbox id="txtbxTitular" width="140px"/>
-				<button label="Adicionar" id="btnCad"/>
+				<label value="Banco" width="150px" />
+				<textbox id="txtbxBanco" width="150px" />
+			</row>
+			<row>
+				<label value="Agencia" width="150px" />
+				<textbox id="txtbxAgencia" width="150px" />
+			</row>
+			<row>
+				Conta
+				<textbox id="txtbxConta" width="150px" />
+			</row>
+			<row>
+				Titular
+				<textbox id="txtbxTitular" width="150px" />
+			</row>
+			<row>
+				<button label="Salvar" id="btnCad" />
 			</row>
 
 		</rows>
-	</grid>
-
+	
+</grid>
 	<!-- Lista Adicionar no index.zul -->
 	<listbox id="lstbxContasCadastradas">
+
 		<listhead>
-			<listheader label="Banco" width="90px"/>
-			<listheader label="Agência" width="90px"/>
-			<listheader label="Conta" width="90px"/>
-			<listheader label="Titular" width="150px"/>
+			<listheader label="Banco" width="90px" />
+			<listheader label="Agência" width="90px" />
+			<listheader label="Conta" width="90px" />
+			<listheader label="Titular" width="150px" />
 		</listhead>
 		<template name="model">
 			<listitem>
-				<listcell label="${each.banco}"/>
-				<listcell label="${each.agencia}"/>
-				<listcell label="${each.numero}"/>
-				<listcell label="${each.titular}"/>
+				<listcell label="${each.banco}" />
+				<listcell label="${each.agencia}" />
+				<listcell label="${each.numero}" />
+				<listcell label="${each.titular}" />
 			</listitem>
 		</template>
 	</listbox>
