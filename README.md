@@ -37,7 +37,7 @@ mvn clean install
 
 A partir da pasta raiz do repositório git, onde temos acesso a todos submodulos, execute o servidor:
 
-java -jar FinancasServer\target\server-0.0.1-SNAPSHOT.jar
+java -jar FinancasServer\target\server-0.0.2-SNAPSHOT.jar
 
 ### Executar o client
 
