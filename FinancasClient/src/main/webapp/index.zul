@@ -1,29 +1,54 @@
 <?page title="Aplicação Finanças"?>
 <window title="By Bruno e Starlley e Julio" border="normal" id="exemplo"
 	apply="br.com.st.controler.Cindex">
+	<label id="now" />
 
-	<grid vflex="1">
+	<!-- 	Adicinado a data inicio -->
+	<timer id="timer" delay="1000" repeats="true">
+		<attribute name="onTimer">
+			now.setValue(new Date().toString());
+		</attribute>
+	</timer>
+	<separator bar="true" />
+<!-- 	Adicinado a data fim -->
+	<grid vflex="1" xmlns:w="client">
 		<columns>
 			<column label="Dados" width="150px" />
 			<column label="" />
-
 		</columns>
 		<rows>
 			<row>
 				<label value="Banco" width="150px" />
-				<textbox id="txtbxBanco" width="150px" />
+				<textbox id="txtbxBanco" width="150px"
+					w:onFocus="jq(this.$f('help1')).fadeIn()"
+					w:onBlur="jq(this.$f('help1')).fadeOut()" />
+				<label id="help1" visible="false"
+					value="Digite o número do banco!" />
+				<!-- 					O codigo acima apresenta uma ajuda para preencher o formulario -->
 			</row>
 			<row>
 				<label value="Agencia" width="150px" />
-				<textbox id="txtbxAgencia" width="150px" />
+				<textbox id="txtbxAgencia" width="150px"
+					w:onFocus="jq(this.$f('help2')).fadeIn()"
+					w:onBlur="jq(this.$f('help2')).fadeOut()" />
+				<label id="help2" visible="false"
+					value="Digite o número da agência!" />
 			</row>
 			<row>
 				Conta
-				<textbox id="txtbxConta" width="150px" />
+				<textbox id="txtbxConta" width="150px"
+					w:onFocus="jq(this.$f('help3')).fadeIn()"
+					w:onBlur="jq(this.$f('help3')).fadeOut()" />
+				<label id="help3" visible="false"
+					value="Digite o número conta com o digito!" />
 			</row>
 			<row>
 				Titular
-				<textbox id="txtbxTitular" width="150px" />
+				<textbox id="txtbxTitular" width="150px"
+					w:onFocus="jq(this.$f('help4')).fadeIn()"
+					w:onBlur="jq(this.$f('help4')).fadeOut()" />
+				<label id="help4" visible="false"
+					value="Digite o nome completo do titular!" />
 			</row>
 			<row>
 				<button label="Salvar" id="btnCad" width="100px">
