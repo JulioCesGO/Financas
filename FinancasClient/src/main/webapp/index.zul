@@ -1,23 +1,24 @@
-<?page title="Aplicação Finanças"?>
-<window title="By Bruno e Starlley e Julio" border="normal" id="exemplo" apply="br.com.st.controler.Cindex">
+<?page title="Aplicação Finanças - By Bruno e Starlley e Julio"?>
+<window title="Aplicação Finanças - By Bruno e Starlley e Julio" border="normal" id="exemplo"
+        apply="br.com.st.controler.Cindex">
 
 	<grid>
 		<columns>
-			<column label="Operação" width="100px"/>
-			<column label="Banco" width="100px"/>
-			<column label="Agência" width="100px"/>
-			<column label="Conta" width="100px"/>
-			<column label="Titular" width="150px"/>
-			<column label="" />
+			<column label="Operação" width="16%"/>
+			<column label="Banco" width="16%"/>
+			<column label="Agência" width="16%"/>
+			<column label="Conta" width="16%"/>
+			<column label="Titular" width="16%"/>
+			<column label="" width="16%"/>
 		</columns>
 		<rows>
 			<row>
-				<label value="Cadastro:"/>
-				<textbox id="txtbxBanco" width="90px"/>
-				<textbox id="txtbxAgencia" width="90px"/>
-				<textbox id="txtbxConta" width="90px"/>
-				<textbox id="txtbxTitular" width="140px"/>
-				<button label="Adicionar" id="btnCad"/>
+				<label value="Cadastro:" width="100%"/>
+				<textbox id="txtbxBanco" width="100%"/>
+				<textbox id="txtbxAgencia" width="100%"/>
+				<textbox id="txtbxConta" width="100%"/>
+				<textbox id="txtbxTitular" width="100%"/>
+				<button label="Adicionar" id="btnCad" width="100%"/>
 			</row>
 
 		</rows>
@@ -26,13 +27,16 @@
 	<!-- Lista Adicionar no index.zul -->
 	<listbox id="lstbxContasCadastradas">
 		<listhead>
-			<listheader label="Banco" width="90px"/>
-			<listheader label="Agência" width="90px"/>
-			<listheader label="Conta" width="90px"/>
-			<listheader label="Titular" width="150px"/>
+			<listheader label="Id" width="20%"/>
+			<listheader label="Banco" width="20%"/>
+			<listheader label="Agência" width="20%"/>
+			<listheader label="Conta" width="20%"/>
+			<listheader label="Titular" width="20%"/>
+			<listheader label="Ver Movimentações" width="20%"/>
 		</listhead>
 		<template name="model">
 			<listitem>
+				<listcell label="${each.id}"/>
 				<listcell label="${each.banco}"/>
 				<listcell label="${each.agencia}"/>
 				<listcell label="${each.numero}"/>

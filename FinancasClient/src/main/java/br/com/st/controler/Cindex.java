@@ -1,16 +1,10 @@
 package br.com.st.controler;
 
-import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.zkoss.zhtml.Link;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -61,8 +55,6 @@ public class Cindex extends SelectorComposer<Component> {
 	private Textbox txtbxConta;
 	@Wire
 	private Textbox txtbxTitular;
-//	@Wire
-//	private Textbox txtbxSaldo;
 
 	@Wire
 	private Listbox lstbxContasCadastradas;
@@ -75,13 +67,16 @@ public class Cindex extends SelectorComposer<Component> {
 		this.lstbxContasCadastradas.setModel(new ListModelArray<Conta>(todasContas));
 	}
 
-	// Metodo que ira ser acionado ao clicar no btnCad //
 	@Listen("onClick = #btnCad")
 	public void addCadastro() throws RemoteException {
 		String valorBanco = this.txtbxBanco.getValue();
 		String valorAgencia = this.txtbxAgencia.getValue();
 		String valorNumeroConta = this.txtbxConta.getValue();
 		String valorTitular = this.txtbxTitular.getValue();
+
+		if (isNullOuBranco(valorBanco) || isNullOuBranco(valorAgencia) || isNullOuBranco(valorNumeroConta) || isNullOuBranco(valorTitular)) {
+			return;
+		}
 
 		Conta conta = new Conta();
 		conta.setBanco(valorBanco);
@@ -93,6 +88,10 @@ public class Cindex extends SelectorComposer<Component> {
 
 		List<Conta> todasContas = contaRMIService.getAllContas();
 		this.lstbxContasCadastradas.setModel(new ListModelArray<Conta>(todasContas));
+	}
+
+	private boolean isNullOuBranco(String valor) {
+		return valor == null || valor.trim() == "";
 	}
 
 }
