@@ -41,6 +41,9 @@
 				<listcell label="${each.agencia}"/>
 				<listcell label="${each.numero}"/>
 				<listcell label="${each.titular}"/>
+				<listcell>
+					<button id="btnListMov${each.id}" label="Mov3." onClick="@command('listarMovimentacoes')"/>
+				</listcell>
 			</listitem>
 		</template>
 	</listbox>

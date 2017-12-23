@@ -5,6 +5,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.List;
 
+import org.zkoss.bind.annotation.Command;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -92,6 +93,11 @@ public class Cindex extends SelectorComposer<Component> {
 
 	private boolean isNullOuBranco(String valor) {
 		return valor == null || valor.trim() == "";
+	}
+
+	@Command
+	public void listarMovimentacoes() {
+		System.out.println("<<<<<<<<<<<<<<<<< Recebeu?");
 	}
 
 }
