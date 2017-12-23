@@ -91,4 +91,33 @@ public class Cindex extends SelectorComposer<Component> {
 		this.lstbxContasCadastradas.setModel(new ListModelArray<Conta>(todasContas));
 	}
 
+
+	private boolean isNullOuBranco(String valor) {
+		return valor == null || valor.trim() == "";
+	}
+
+	@Command
+	public void listarMovimentacoes() {
+		System.out.println("<<<<<<<<<<<<<<<<< Recebeu?");
+	}
+
+	@Listen("onClick = #btnDel")
+	public void dellCadastro() throws RemoteException {
+		String valorBanco = this.txtbxBanco.getValue();
+		String valorAgencia = this.txtbxAgencia.getValue();
+		String valorNumeroConta = this.txtbxConta.getValue();
+		String valorTitular = this.txtbxTitular.getValue();
+
+		Conta conta = new Conta();
+		conta.setBanco(valorBanco);
+		conta.setAgencia(valorAgencia);
+		conta.setNumero(valorNumeroConta);
+		conta.setTitular(valorTitular);
+
+		contaRMIService.adicionarConta(conta);
+
+		List<Conta> todasContas = contaRMIService.getAllContas();
+		this.lstbxContasCadastradas.setModel(new ListModelArray<Conta>(todasContas));
+	}
+
 }

@@ -4,37 +4,38 @@
 
 	<grid vflex="1">
 		<columns>
-			<column label="Dados" width="150px" />
-			<column label="" />
+			<column label="Dados" width="150px"/>
+			<column label=""/>
+
 		</columns>
 		<rows>
 			<row>
-				<label value="Banco" width="150px" />
-				<textbox id="txtbxBanco" width="150px" />
+				<label value="Banco" width="150px"/>
+				<textbox id="txtbxBanco" width="150px"/>
 			</row>
 			<row>
-				<label value="Agencia" width="150px" />
-				<textbox id="txtbxAgencia" width="150px" />
+				<label value="Agencia" width="150px"/>
+				<textbox id="txtbxAgencia" width="150px"/>
 			</row>
 			<row>
 				Conta
-				<textbox id="txtbxConta" width="150px" />
+				<textbox id="txtbxConta" width="150px"/>
 			</row>
 			<row>
 				Titular
-				<textbox id="txtbxTitular" width="150px" />
+				<textbox id="txtbxTitular" width="150px"/>
 			</row>
 			<row>
 				<button label="Salvar" id="btnCad" />
-			</row>
 
+			</row>
 		</rows>
-	
-</grid>
+	</grid>
+
 	<!-- Lista Adicionar no index.zul -->
 	<listbox id="lstbxContasCadastradas">
-
 		<listhead>
+
 			<listheader label="Banco" width="90px" />
 			<listheader label="Agência" width="90px" />
 			<listheader label="Conta" width="90px" />
@@ -46,6 +47,25 @@
 				<listcell label="${each.agencia}" />
 				<listcell label="${each.numero}" />
 				<listcell label="${each.titular}" />
+
+			<listheader label="Id" width="20%"/>
+			<listheader label="Banco" width="20%"/>
+			<listheader label="Agência" width="20%"/>
+			<listheader label="Conta" width="20%"/>
+			<listheader label="Titular" width="20%"/>
+			<listheader label="Ver Movimentações" width="20%"/>
+		</listhead>
+		<template name="model">
+			<listitem>
+				<listcell label="${each.id}"/>
+				<listcell label="${each.banco}"/>
+				<listcell label="${each.agencia}"/>
+				<listcell label="${each.numero}"/>
+				<listcell label="${each.titular}"/>
+				<listcell>
+					<button id="btnListMov${each.id}" label="Mov3." onClick="@command('listarMovimentacoes')"/>
+				</listcell>
+
 			</listitem>
 		</template>
 	</listbox>
