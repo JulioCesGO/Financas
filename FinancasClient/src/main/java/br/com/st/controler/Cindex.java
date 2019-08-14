@@ -166,6 +166,7 @@ public class Cindex extends SelectorComposer<Component> {
 		atualizaDadosDaTela(false);
 	}
 
+
 	private boolean isNullOuBranco(String valor) {
 		return valor == null || valor.trim() == "";
 	}
